@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import java.util.ArrayList;
 import spark.ModelAndView;
+// import java.lang.*;
 import spark.template.velocity.VelocityTemplateEngine;
 
 import static spark.Spark.*;
@@ -19,9 +20,11 @@ public class App {
     post("/add-band", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       String inputtedName = request.queryParams("name");
-      Band newBand = new Band(inputtedName);
-      newBand.save();
-      model.put("newBand", newBand);
+      if (inputtedName.trim().length() > 0) {
+        Band newBand = new Band(inputtedName);
+        newBand.save();
+        model.put("newBand", newBand);
+      }
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -29,9 +32,11 @@ public class App {
     post("/add-venue", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       String inputtedLocation = request.queryParams("location");
-      Venue newVenue = new Venue(inputtedLocation);
-      newVenue.save();
-      model.put("newVenue", newVenue);
+      if (inputtedLocation.trim().length() > 0) {
+        Venue newVenue = new Venue(inputtedLocation);
+        newVenue.save();
+        model.put("newVenue", newVenue);
+      }
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -94,7 +99,7 @@ public class App {
       return null;
       });
 
-    post("/bands/:id", (request, response) -> {
+    post("/bands/:id/delete", (request, response) -> {
       Band band = Band.find(Integer.parseInt(request.params("id")));
       band.delete();
       response.redirect("/bands");
