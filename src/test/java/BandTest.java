@@ -11,4 +11,11 @@ public class BandTest {
   public void all_returnsAllBands_emptyAtFirst() {
     assertEquals(Band.all().size(), 0);
   }
+
+  @Test
+   public void equals_returnsTrueIfBandNamesAreTheSame() {
+     Band firstBand = new Band("Sylvan Esso");
+     Band secondBand = new Band("Sylvan Esso");
+     assertTrue(firstBand.equals(secondBand));
+   }
 }

@@ -26,4 +26,15 @@ public class Band {
       .executeAndFetch(Band.class);
     }
   }
+
+  @Override
+  public boolean equals(Object newBand) {
+    if (newBand instanceof Band) {
+      Band otherBand = (Band) newBand;
+      return this.getName().equals(otherBand.getName()) &&
+        this.getId() == otherBand.getId();
+    } else {
+      return false;
+    }
+  }
 }
