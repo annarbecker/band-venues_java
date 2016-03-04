@@ -13,9 +13,25 @@ public class BandTest {
   }
 
   @Test
-   public void equals_returnsTrueIfBandNamesAreTheSame() {
-     Band firstBand = new Band("Sylvan Esso");
-     Band secondBand = new Band("Sylvan Esso");
-     assertTrue(firstBand.equals(secondBand));
-   }
+  public void equals_returnsTrueIfBandNamesAreTheSame() {
+   Band firstBand = new Band("Sylvan Esso");
+   Band secondBand = new Band("Sylvan Esso");
+   assertTrue(firstBand.equals(secondBand));
+  }
+
+  @Test
+  public void save_savesBandIntoDatabase() {
+    Band myBand = new Band("Sylvan Esso");
+    myBand.save();
+    assertEquals(Band.all().get(0), myBand);
+  }
+
+  @Test
+  public void save_addIdToLocalObject() {
+    Band myBand = new Band("Sylvan Esso");
+    myBand.save();
+    assertEquals(Band.all().get(0).getId(), myBand.getId());
+
+  }
+
 }
