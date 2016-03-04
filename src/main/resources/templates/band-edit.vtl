@@ -1,0 +1,12 @@
+<h1>Edit $band.getName()</h1>
+
+<form action="/bands/$band.getId()/edit" method="post">
+  <label for="editName">Name</label>
+  <input id="editName" name="editName" type="text" value="$band.getName()">
+  <button type="submit" id="updateBand">Update band</button>
+</form>
+<br>
+
+<form action='/bands/$band.getId()' method='post'>
+  <button type="submit" class="btn btn-warning" id="deleteBand">Delete This Band</button>
+</form>

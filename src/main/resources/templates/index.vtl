@@ -4,15 +4,16 @@
     <form action="/add-band" method="post">
       <div class="form-group">
         <label for="name">Band Name</label>
-        <input type="text" id="name" name="name" placeholder="enter band name" required autofocus>
+        <input class="form-control" type="text" id="name" name="name" placeholder="enter band name" required autofocus>
       </div>
       <button type="submit" class="btn btn-default" id="addBand">Add Band</button>
     </form>
+
+    #if ($newBand)
+    <h4>$newBand.getName() has been added to the band list</h4>
+    #end
   </div>
 
-  #if ($newBand)
-  <h4>$newBand.getName() has been added to the band list</h4>
-  #end
 
   <div class="col-md-6">
     <h3>Add A Venue</h3>
@@ -21,11 +22,11 @@
         <label for="location">Venue Name</label>
         <input type="text" id="location" name="location" placeholder="enter venue name" required autofocus>
       </div>
-      <button type="submit" name="button" id="addVenue">Add Band</button>
+      <button type="submit" class="btn btn-default" id="addVenue">Add Band</button>
     </form>
+    #if ($newVenue)
+    <h4>$newVenue.getLocation() has been added to the venue list</h4>
+    #end
   </div>
 
-  #if ($newVenue)
-  <h4>$newVenue.getLocation() has been added to the venue list</h4>
-  #end
 </div>

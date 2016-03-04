@@ -26,6 +26,16 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    post("/add-venue", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      String inputtedLocation = request.queryParams("location");
+      Venue newVenue = new Venue(inputtedLocation);
+      newVenue.save();
+      model.put("newVenue", newVenue);
+      model.put("template", "templates/index.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
     get("/bands", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       model.put("bands", Band.all());
@@ -50,14 +60,29 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    post("/add-venue", (request, response) -> {
+    get("/bands/:id/edit", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      String inputtedLocation = request.queryParams("location");
-      Venue newVenue = new Venue(inputtedLocation);
-      newVenue.save();
-      model.put("newVenue", newVenue);
-      model.put("template", "templates/index.vtl");
+      Band band = Band.find(Integer.parseInt(request.params("id")));
+      model.put("band", band);
+      model.put("template", "templates/band-edit.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    post("/bands/:id/edit", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Band band = Band.find(Integer.parseInt(request.params("id")));
+      String editName = request.queryParams("editName");
+      band.update(editName);
+      response.redirect("/bands");
+      return null;
+      });
+
+    post("/bands/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Band band = Band.find(Integer.parseInt(request.params("id")));
+      band.delete();
+      response.redirect("/bands");
+      return null;
+    });
   }
 }

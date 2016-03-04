@@ -69,4 +69,24 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).contains("Keller Auditorium");
     assertThat(pageSource()).contains("The Gorge");
   }
+
+  @Test
+  public void editBand() {
+    Band myBand = new Band("Sylvan Esso");
+    myBand.save();
+    String bandPath = String.format("http://localhost:4567/bands/%d/edit", myBand.getId());
+    goTo(bandPath);
+    assertThat(pageSource()).contains("Sylvan Esso");
+  }
+
+  @Test
+  public void deleteBand() {
+    Band myBand = new Band("Sylvan Esso");
+    myBand.save();
+    String bandPath = String.format("http://localhost:4567/bands/%d/edit", myBand.getId());
+    goTo(bandPath);
+    submit("#deleteBand");
+    goTo("http://localhost:4567/bands");
+    assertThat(!(pageSource()).contains("Sylvan Esso"));
+  }
 }
