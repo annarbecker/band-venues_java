@@ -7,6 +7,17 @@
 </form>
 <br>
 
+<form action="/bands/$band.getId()/deleteVenue" method="post">
+#foreach ($venue in $venues)
+  <div class="checkbox">
+    <label><input type="checkbox" id="venue$venue.getId" name="delete-venues" value="$venue.getId()">$venue.getLocation()</label>
+  </div>
+#end
+<button type="submit" class="btn btn-default" id="deleteBVenue">Delete Venues</button>
+</form>
+
+<br>
+
 <form action='/bands/$band.getId()/delete' method='post'>
   <button type="submit" class="btn btn-warning" id="deleteBand">Delete This Band</button>
 </form>

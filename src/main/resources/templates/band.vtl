@@ -6,7 +6,7 @@
 #end
 
 <h3>Add Band Venue</h3>
-<form class="" action="/bands/$band.getId()" method="post">
+<form action="/bands/$band.getId()" method="post">
 #foreach ($venue in $venues)
   <div class="checkbox">
     <label><input type="checkbox" id="venue$venue.getId" name="band-venues" value="$venue.getId()">$venue.getLocation()</label>

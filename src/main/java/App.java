@@ -86,6 +86,7 @@ public class App {
     get("/bands/:id/edit", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       Band band = Band.find(Integer.parseInt(request.params("id")));
+      model.put("venues", band.getVenues());
       model.put("band", band);
       model.put("template", "templates/band-edit.vtl");
       return new ModelAndView(model, layout);
@@ -112,6 +113,21 @@ public class App {
       model.put("venue", venue);
       model.put("bands", venue.getBands());
       model.put("template", "templates/venue.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/bands/:id/deleteVenue", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Band band = Band.find(Integer.parseInt(request.params("id")));
+      String [] deletedVenues = request.queryParamsValues("delete-venues");
+      if (deletedVenues != null) {
+        for(String venue : deletedVenues) {
+          band.deleteVenue(Integer.parseInt(venue));
+        }
+      }
+      model.put("band", band);
+      model.put("venues", band.getVenues());
+      model.put("template", "templates/band-edit.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
   }
