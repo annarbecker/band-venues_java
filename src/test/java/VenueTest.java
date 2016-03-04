@@ -14,23 +14,23 @@ public class VenueTest {
 
   @Test
   public void equals_returnsTrueIfBandNamesAreTheSame() {
-   Venue firstVenue = new Venue("Keller Auditorium", "10/11/2012");
-   Venue secondVenue = new Venue("Keller Auditorium", "10/11/2012");
+   Venue firstVenue = new Venue("Keller Auditorium");
+   Venue secondVenue = new Venue("Keller Auditorium");
    assertTrue(firstVenue.equals(secondVenue));
   }
 
   @Test
   public void save_savesVenueIntoDatabase(){
-    Venue firstVenue = new Venue("Keller Auditorium", "10/11/2012");
+    Venue firstVenue = new Venue("Keller Auditorium");
     firstVenue.save();
     assertEquals(Venue.all().get(0), firstVenue);
   }
 
   @Test
   public void find_findsASpecificVenueInDatabase() {
-    Venue firstVenue = new Venue("Keller Auditorium", "10/11/2012");
+    Venue firstVenue = new Venue("Keller Auditorium");
     firstVenue.save();
-    Venue secondVenue = new Venue("The Gorge", "10/11/2012");
+    Venue secondVenue = new Venue("The Gorge");
     secondVenue.save();
     Venue newVenue = Venue.find(firstVenue.getId());
     assertTrue(newVenue.equals(firstVenue));
@@ -43,9 +43,9 @@ public class VenueTest {
     firstBand.save();
     Band secondBand = new Band("The Head & the Heart");
     secondBand.save();
-    Venue firstVenue = new Venue("Keller Auditorium", "10/11/2012");
+    Venue firstVenue = new Venue("Keller Auditorium");
     firstVenue.save();
-    Venue secondVenue = new Venue("The Gorge", "10/11/2012");
+    Venue secondVenue = new Venue("The Gorge");
     secondVenue.save();
     firstVenue.addBand(firstBand.getId());
     firstVenue.addBand(secondBand.getId());
@@ -56,9 +56,9 @@ public class VenueTest {
 
   @Test
   public void delete_deletesObjectFromDatabase(){
-    Venue firstVenue = new Venue("Keller Auditorium", "10/11/2012");
+    Venue firstVenue = new Venue("Keller Auditorium");
     firstVenue.save();
-    Venue secondVenue = new Venue("The Gorge Ampitheater", "10/11/2012");
+    Venue secondVenue = new Venue("The Gorge Ampitheater");
     secondVenue.save();
     firstVenue.delete();
     assertEquals(Venue.all().size(), 1);

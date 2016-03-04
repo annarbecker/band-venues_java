@@ -6,11 +6,9 @@ import java.util.ArrayList;
 public class Venue {
   private int id;
   private String location;
-  private String show_date;
 
-  public Venue(String location, String show_date){
+  public Venue(String location){
     this.location = location;
-    this.show_date = show_date;
   }
 
   public int getId() {
@@ -19,10 +17,6 @@ public class Venue {
 
   public String getLocation() {
     return location;
-  }
-
-  public String getShowDate() {
-    return show_date;
   }
 
   public static List<Venue> all(){
@@ -44,11 +38,10 @@ public class Venue {
   }
 
   public void save() {
-    String sql = "INSERT INTO venues (location, show_date) VALUES (:location, :show_date)";
+    String sql = "INSERT INTO venues (location) VALUES (:location)";
     try(Connection con = DB.sql2o.open()){
       this.id = (int) con.createQuery(sql, true)
         .addParameter("location", location)
-        .addParameter("show_date", show_date)
         .executeUpdate()
         .getKey();
     }
@@ -90,5 +83,4 @@ public class Venue {
         .executeUpdate();
     }
   }
-
 }

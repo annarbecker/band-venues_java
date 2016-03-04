@@ -41,6 +41,14 @@ public class AppTest extends FluentTest {
   }
 
   @Test
+  public void venueIsCreated() {
+    goTo("http://localhost:4567/");
+    fill("#location").with("Keller Auditorium");
+    submit("#addVenue");
+    assertThat(pageSource()).contains("Keller Auditorium");
+  }
+
+  @Test
   public void bandIsDisplayed() {
     Band myBand = new Band("Sylvan Esso");
     myBand.save();
@@ -49,5 +57,16 @@ public class AppTest extends FluentTest {
     goTo("http://localhost:4567/bands");
     assertThat(pageSource()).contains("Sylvan Esso");
     assertThat(pageSource()).contains("The Head and the Heart");
+  }
+
+  @Test
+  public void venueIsDisplayed() {
+    Venue myVenue = new Venue("Keller Auditorium");
+    myVenue.save();
+    Venue newVenue = new Venue("The Gorge");
+    newVenue.save();
+    goTo("http://localhost:4567/venues");
+    assertThat(pageSource()).contains("Keller Auditorium");
+    assertThat(pageSource()).contains("The Gorge");
   }
 }

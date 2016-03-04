@@ -71,9 +71,9 @@ public class BandTest {
     firstBand.save();
     Band secondBand = new Band("The Head & the Heart");
     secondBand.save();
-    Venue firstVenue = new Venue("The Keller Auditorium", "10/11/2012");
+    Venue firstVenue = new Venue("The Keller Auditorium");
     firstVenue.save();
-    Venue secondVenue = new Venue("The Gorge", "10/11/2012");
+    Venue secondVenue = new Venue("The Gorge");
     secondVenue.save();
     firstBand.addVenue(firstVenue.getId());
     firstBand.addVenue(secondVenue.getId());
