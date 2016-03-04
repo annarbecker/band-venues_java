@@ -64,4 +64,21 @@ public class BandTest {
     assertEquals(savedBand.getName(), "The Sylvan Essos");
     assertTrue(savedBand.equals(myBand));
   }
+
+  @Test
+  public void addVenue_addsAVenueToABand() {
+    Band firstBand = new Band("Sylvan Esso");
+    firstBand.save();
+    Band secondBand = new Band("The Head & the Heart");
+    secondBand.save();
+    Venue firstVenue = new Venue("The Keller Auditorium", "10/11/2012");
+    firstVenue.save();
+    Venue secondVenue = new Venue("The Gorge", "10/11/2012");
+    secondVenue.save();
+    firstBand.addVenue(firstVenue.getId());
+    firstBand.addVenue(secondVenue.getId());
+    secondBand.addVenue(firstVenue.getId());
+    assertTrue(secondBand.getVenues().contains(firstVenue));
+    assertEquals(firstBand.getVenues().size(), 2);
+  }
 }
