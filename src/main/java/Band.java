@@ -51,9 +51,18 @@ public class Band {
   public static Band find(int id) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM bands WHERE id = :id";
-    return con.createQuery(sql)
-      .addParameter("id", id)
-      .executeAndFetchFirst(Band.class);
+      return con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Band.class);
+    }
+  }
+
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM bands WHERE id = :id";
+      con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeUpdate();
     }
   }
 }

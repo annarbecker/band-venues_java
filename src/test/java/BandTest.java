@@ -42,4 +42,16 @@ public class BandTest {
     Band newBand = Band.find(firstBand.getId());
     assertTrue(newBand.equals(firstBand));
   }
+
+  @Test
+  public void delete_removesBandFromDatabase() {
+    Band firstBand = new Band("Sylvan Esso");
+    firstBand.save();
+    Band secondBand = new Band("The Head & The Heart");
+    secondBand.save();
+    Band thirdBand = new Band("The Beatles");
+    thirdBand.save();
+    firstBand.delete();
+    assertEquals(Band.all().size(), 2);
+  }
 }
