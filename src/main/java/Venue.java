@@ -13,11 +13,11 @@ public class Venue {
     this.show_date = show_date;
   }
 
-  public int getId(){
+  public int getId() {
     return id;
   }
 
-  public String getLocation(){
+  public String getLocation() {
     return location;
   }
 
@@ -31,4 +31,26 @@ public class Venue {
       return con.createQuery(sql).executeAndFetch(Venue.class);
     }
   }
+
+  @Override
+  public boolean equals(Object newVenue) {
+    if (newVenue instanceof Venue) {
+      Venue otherVenue = (Venue) newVenue;
+      return this.getLocation().equals(otherVenue.getLocation()) &&
+        this.getId() == otherVenue.getId();
+    } else {
+      return false;
+    }
+  }
+
+  public void save() {
+      String sql = "INSERT INTO venues (location, show_date) VALUES (:location, :show_date)";
+      try(Connection con = DB.sql2o.open()){
+        this.id = (int) con.createQuery(sql, true)
+          .addParameter("location", location)
+          .addParameter("show_date", show_date)
+          .executeUpdate()
+          .getKey();
+      }
+    }
 }
