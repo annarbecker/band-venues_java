@@ -107,4 +107,14 @@ public class AppTest extends FluentTest {
     goTo(venuePath);
     assertThat(pageSource()).contains("Keller Auditorium");
   }
+
+  @Test
+  public void updateBandPage() {
+    Band myBand = new Band("Sylvan Esso");
+    myBand.save();
+    String bandPath = String.format("http://localhost:4567/bands/%d/edit", myBand.getId());
+    goTo(bandPath);
+    submit("#updateBand");
+    assertThat(pageSource()).contains("Venues Played");
+  }
 }
