@@ -71,6 +71,15 @@ public class AppTest extends FluentTest {
   }
 
   @Test
+  public void veiwBandPage() {
+    Band myBand = new Band("Sylvan Esso");
+    myBand.save();
+    String bandPath = String.format("http://localhost:4567/bands/%d", myBand.getId());
+    goTo(bandPath);
+    assertThat(pageSource()).contains("Sylvan Esso");
+  }
+
+  @Test
   public void editBand() {
     Band myBand = new Band("Sylvan Esso");
     myBand.save();
@@ -88,5 +97,14 @@ public class AppTest extends FluentTest {
     submit("#deleteBand");
     goTo("http://localhost:4567/bands");
     assertThat(!(pageSource()).contains("Sylvan Esso"));
+  }
+
+  @Test
+  public void veiwVenuePage() {
+    Venue myVenue = new Venue("Keller Auditorium");
+    myVenue.save();
+    String venuePath = String.format("http://localhost:4567/venues/%d", myVenue.getId());
+    goTo(venuePath);
+    assertThat(pageSource()).contains("Keller Auditorium");
   }
 }
