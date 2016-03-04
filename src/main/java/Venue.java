@@ -44,13 +44,23 @@ public class Venue {
   }
 
   public void save() {
-      String sql = "INSERT INTO venues (location, show_date) VALUES (:location, :show_date)";
-      try(Connection con = DB.sql2o.open()){
-        this.id = (int) con.createQuery(sql, true)
-          .addParameter("location", location)
-          .addParameter("show_date", show_date)
-          .executeUpdate()
-          .getKey();
-      }
+    String sql = "INSERT INTO venues (location, show_date) VALUES (:location, :show_date)";
+    try(Connection con = DB.sql2o.open()){
+      this.id = (int) con.createQuery(sql, true)
+        .addParameter("location", location)
+        .addParameter("show_date", show_date)
+        .executeUpdate()
+        .getKey();
     }
+  }
+
+  public static Venue find(int id){
+  String sql = "SELECT * FROM venues WHERE id=:id";
+  try(Connection con = DB.sql2o.open()){
+    return con.createQuery(sql)
+      .addParameter("id", id)
+      .executeAndFetchFirst(Venue.class);
+  }
+}
+
 }

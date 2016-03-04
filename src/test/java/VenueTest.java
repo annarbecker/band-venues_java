@@ -21,8 +21,19 @@ public class VenueTest {
 
   @Test
   public void save_savesVenueIntoDatabase(){
-    Venue concertHall = new Venue("Keller Auditorium", "10/11/2012");
-    concertHall.save();
-    assertEquals(Venue.all().get(0), concertHall);
+    Venue firstVenue = new Venue("Keller Auditorium", "10/11/2012");
+    firstVenue.save();
+    assertEquals(Venue.all().get(0), firstVenue);
+  }
+
+  @Test
+  public void find_findsASpecificVenueInDatabase() {
+    Venue firstVenue = new Venue("Keller Auditorium", "10/11/2012");
+    firstVenue.save();
+    Venue secondVenue = new Venue("The Gorge", "10/11/2012");
+    secondVenue.save();
+    Venue newVenue = Venue.find(firstVenue.getId());
+    assertTrue(newVenue.equals(firstVenue));
+    assertTrue(Venue.all().contains(secondVenue));
   }
 }
