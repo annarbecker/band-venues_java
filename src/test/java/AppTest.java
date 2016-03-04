@@ -44,7 +44,10 @@ public class AppTest extends FluentTest {
   public void bandIsDisplayed() {
     Band myBand = new Band("Sylvan Esso");
     myBand.save();
+    Band newBand = new Band("The Head and the Heart");
+    newBand.save();
     goTo("http://localhost:4567/bands");
     assertThat(pageSource()).contains("Sylvan Esso");
+    assertThat(pageSource()).contains("The Head and the Heart");
   }
 }
