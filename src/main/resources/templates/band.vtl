@@ -2,7 +2,7 @@
 
 <h3>Venues Played</h3>
 #foreach($bandVenue in $bandVenues)
-  <p>$bandVenue.getLocation()</p>
+  <p><a href="/venues/$bandVenue.getId()">$bandVenue.getLocation()</a></p>
 #end
 
 <h3>Add Band Venue</h3>
