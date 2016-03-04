@@ -54,4 +54,14 @@ public class BandTest {
     firstBand.delete();
     assertEquals(Band.all().size(), 2);
   }
+
+  @Test
+  public void update_updatesBandsInfo() {
+    Band myBand = new Band("Sylvan Esso");
+    myBand.save();
+    myBand.update("The Sylvan Essos");
+    Band savedBand = Band.find(myBand.getId());
+    assertEquals(savedBand.getName(), "The Sylvan Essos");
+    assertTrue(savedBand.equals(myBand));
+  }
 }
