@@ -37,6 +37,14 @@ public class AppTest extends FluentTest {
     goTo("http://localhost:4567/");
     fill("#name").with("Sylvan Esso");
     submit("#addBand");
-    assertThat(pageSource()).contains("added");
+    assertThat(pageSource()).contains("Sylvan Esso");
+  }
+
+  @Test
+  public void bandIsDisplayed() {
+    Band myBand = new Band("Sylvan Esso");
+    myBand.save();
+    goTo("http://localhost:4567/bands");
+    assertThat(pageSource()).contains("Sylvan Esso");
   }
 }
