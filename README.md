@@ -2,7 +2,7 @@
 
 #### Web app to track bands and played venues using Java and Postgres | March 4, 2016
 
-#### Authors
+#### By Anna Becker
 
 ## Description
 A program to track bands and the venues where they've played concerts.
