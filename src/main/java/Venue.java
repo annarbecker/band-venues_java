@@ -54,13 +54,41 @@ public class Venue {
     }
   }
 
-  public static Venue find(int id){
+  public static Venue find(int id) {
   String sql = "SELECT * FROM venues WHERE id=:id";
   try(Connection con = DB.sql2o.open()){
     return con.createQuery(sql)
       .addParameter("id", id)
       .executeAndFetchFirst(Venue.class);
+    }
   }
-}
+
+  public void addBand(int band_id) {
+    String sql = "INSERT INTO bands_venues (band_id, venue_id) VALUES (:band_id, :venue_id)";
+    try(Connection con = DB.sql2o.open()){
+      con.createQuery(sql)
+        .addParameter("band_id", band_id)
+        .addParameter("venue_id", id)
+        .executeUpdate();
+    }
+  }
+
+  public List<Band> getBands() {
+  String sql = "SELECT DISTINCT ON (name) bands.* FROM venues JOIN bands_venues ON (venues.id = bands_venues.venue_id) JOIN bands ON (bands_venues.band_id = bands.id) WHERE venues.id = :id ORDER BY name, id";
+  try(Connection con = DB.sql2o.open()) {
+    return con.createQuery(sql)
+      .addParameter("id", this.id)
+      .executeAndFetch(Band.class);
+    }
+  }
+
+  public void delete() {
+    String sql = "DELETE FROM venues WHERE id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
 
 }

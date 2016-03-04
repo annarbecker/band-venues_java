@@ -36,4 +36,31 @@ public class VenueTest {
     assertTrue(newVenue.equals(firstVenue));
     assertTrue(Venue.all().contains(secondVenue));
   }
+
+  @Test
+  public void addBand_addsABandToAVenue() {
+    Band firstBand = new Band("Sylvan Esso");
+    firstBand.save();
+    Band secondBand = new Band("The Head & the Heart");
+    secondBand.save();
+    Venue firstVenue = new Venue("Keller Auditorium", "10/11/2012");
+    firstVenue.save();
+    Venue secondVenue = new Venue("The Gorge", "10/11/2012");
+    secondVenue.save();
+    firstVenue.addBand(firstBand.getId());
+    firstVenue.addBand(secondBand.getId());
+    secondVenue.addBand(firstBand.getId());
+    assertTrue(secondVenue.getBands().contains(firstBand));
+    assertEquals(firstVenue.getBands().size(), 2);
+  }
+
+  @Test
+  public void delete_deletesObjectFromDatabase(){
+    Venue firstVenue = new Venue("Keller Auditorium", "10/11/2012");
+    firstVenue.save();
+    Venue secondVenue = new Venue("The Gorge Ampitheater", "10/11/2012");
+    secondVenue.save();
+    firstVenue.delete();
+    assertEquals(Venue.all().size(), 1);
+  }
 }
