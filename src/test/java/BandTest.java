@@ -31,7 +31,15 @@ public class BandTest {
     Band myBand = new Band("Sylvan Esso");
     myBand.save();
     assertEquals(Band.all().get(0).getId(), myBand.getId());
-
   }
 
+  @Test
+  public void find_returnsBandWithSameId() {
+    Band firstBand = new Band("Sylvan Esso");
+    firstBand.save();
+    Band secondBand = new Band("The Head & The Heart");
+    secondBand.save();
+    Band newBand = Band.find(firstBand.getId());
+    assertTrue(newBand.equals(firstBand));
+  }
 }
