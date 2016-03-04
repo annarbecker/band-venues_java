@@ -76,9 +76,9 @@ public class Band {
     }
   }
 
-  public void addVenue(int venue_id){
-    String sql = "INSERT INTO bands_venues (band_id, venue_id) VALUES (:band_id, :venue_id)";
+  public void addVenue(int venue_id) {
     try(Connection con = DB.sql2o.open()){
+      String sql = "INSERT INTO bands_venues (band_id, venue_id) VALUES (:band_id, :venue_id)";
       con.createQuery(sql)
         .addParameter("band_id", this.id)
         .addParameter("venue_id", venue_id)
@@ -86,9 +86,28 @@ public class Band {
     }
   }
 
-  public List<Venue> getVenues(){
+  public void deleteVenue(int venue_id) {
+    try(Connection con = DB.sql2o.open()){
+      String sql = "DELETE FROM bands_venues WHERE band_id = :band_id AND venue_id = :venue_id";
+      con.createQuery(sql)
+        .addParameter("band_id", this.id)
+        .addParameter("venue_id", venue_id)
+        .executeUpdate();
+    }
+  }
+
+  public List<Venue> getVenues() {
     String sql = "SELECT DISTINCT ON (location) venues.* FROM bands JOIN bands_venues ON (bands.id = bands_venues.band_id) JOIN venues ON (bands_venues.venue_id = venues.id) WHERE bands.id=:id ORDER BY location";
     try(Connection con = DB.sql2o.open()){
+      return con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetch(Venue.class);
+    }
+  }
+
+  public List<Venue> availableVenues() {
+    String sql = "SELECT * FROM venues WHERE id NOT IN (SELECT venue_id FROM bands_venues WHERE band_id=:id)";
+    try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetch(Venue.class);

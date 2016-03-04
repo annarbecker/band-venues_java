@@ -81,4 +81,18 @@ public class BandTest {
     assertTrue(secondBand.getVenues().contains(firstVenue));
     assertEquals(firstBand.getVenues().size(), 2);
   }
+
+  @Test
+  public void deleteVenue_removesVenueFromBand() {
+    Band firstBand = new Band("Sylvan Esso");
+    firstBand.save();
+    Venue firstVenue = new Venue("The Keller Auditorium");
+    firstVenue.save();
+    Venue secondVenue = new Venue("The Gorge");
+    secondVenue.save();
+    firstBand.addVenue(firstVenue.getId());
+    firstBand.addVenue(secondVenue.getId());
+    firstBand.deleteVenue(firstVenue.getId());
+    assertTrue(firstBand.getVenues().contains(secondVenue));
+  }
 }

@@ -1,9 +1,16 @@
 <h2>$band.getName()</h2>
-<a href="/bands/$band.getId()/edit">Edit Band</a>
 
 <h3>Venues Played</h3>
-#foreach($venue in $venues)
-  <p>$venue.getLocation()</p>
+#foreach($bandVenue in $bandVenues)
+  <p>$bandVenue.getLocation()</p>
 #end
 
-<h3>Add Venue</h3>
+<h3>Add Band Venue</h3>
+<form class="" action="/bands/$band.getId()" method="post">
+#foreach ($venue in $venues)
+  <div class="checkbox">
+    <label><input type="checkbox" id="venue$venue.getId" name="band-venues" value="$venue.getId()">$venue.getLocation()</label>
+  </div>
+#end
+<button type="submit" class="btn btn-default" id="addVenue">Add Venue</button>
+</form>
