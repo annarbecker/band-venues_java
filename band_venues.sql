@@ -106,8 +106,7 @@ ALTER SEQUENCE bands_venues_id_seq OWNED BY bands_venues.id;
 
 CREATE TABLE venues (
     id integer NOT NULL,
-    location character varying,
-    show_date character varying
+    location character varying
 );
 
 
@@ -167,7 +166,7 @@ COPY bands (id, name) FROM stdin;
 -- Name: bands_id_seq; Type: SEQUENCE SET; Schema: public; Owner: arbecker
 --
 
-SELECT pg_catalog.setval('bands_id_seq', 6, true);
+SELECT pg_catalog.setval('bands_id_seq', 40, true);
 
 
 --
@@ -182,14 +181,14 @@ COPY bands_venues (id, band_id, venue_id) FROM stdin;
 -- Name: bands_venues_id_seq; Type: SEQUENCE SET; Schema: public; Owner: arbecker
 --
 
-SELECT pg_catalog.setval('bands_venues_id_seq', 9, true);
+SELECT pg_catalog.setval('bands_venues_id_seq', 89, true);
 
 
 --
 -- Data for Name: venues; Type: TABLE DATA; Schema: public; Owner: arbecker
 --
 
-COPY venues (id, location, show_date) FROM stdin;
+COPY venues (id, location) FROM stdin;
 \.
 
 
@@ -197,7 +196,7 @@ COPY venues (id, location, show_date) FROM stdin;
 -- Name: venues_id_seq; Type: SEQUENCE SET; Schema: public; Owner: arbecker
 --
 
-SELECT pg_catalog.setval('venues_id_seq', 3, true);
+SELECT pg_catalog.setval('venues_id_seq', 20, true);
 
 
 --
