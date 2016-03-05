@@ -1,7 +1,6 @@
 import java.util.HashMap;
 import java.util.ArrayList;
 import spark.ModelAndView;
-// import java.lang.*;
 import spark.template.velocity.VelocityTemplateEngine;
 
 import static spark.Spark.*;
@@ -96,17 +95,15 @@ public class App {
       Band band = Band.find(Integer.parseInt(request.params("id")));
       String editName = request.queryParams("editName");
       band.update(editName);
-
       String [] deletedVenues = request.queryParamsValues("delete-venues");
       if (deletedVenues != null) {
         for(String venue : deletedVenues) {
           band.deleteVenue(Integer.parseInt(venue));
         }
       }
-
       response.redirect("/bands/" + band.getId());
       return null;
-      });
+    });
 
     post("/bands/:id/delete", (request, response) -> {
       Band band = Band.find(Integer.parseInt(request.params("id")));
