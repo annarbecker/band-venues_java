@@ -2,6 +2,19 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+.jumbotron {
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+a {
+  color: #009878;
+}
+
+a:hover {
+  color: #00CCA0;
+}
+
 .list {
   text-align: center;
   background-color: #00CCA0;
@@ -10,6 +23,7 @@ body {
   padding-bottom: 2px;
   margin: 20px;
   font-size: 18px;
+  border-radius: 5px;
 }
 
 .list:hover {
