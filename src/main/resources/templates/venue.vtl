@@ -1,6 +1,19 @@
 <h2>$venue.getLocation()</h2>
+<hr>
 
-<h2>Bands That Have Played This Venue</h2>
-#foreach ($band in $bands)
-<h3><a href="/bands/$band.getId()">$band.getName()</a></h3>
-#end
+
+<div class="row">
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-8">
+    <h3>Bands That Played This Venue</h3>
+    <hr>
+    #foreach ($band in $bands)
+    <div class="list">
+      <p><a href="/bands/$band.getId()">$band.getName()</a></p>
+    </div>
+    #end
+  </div>
+  <div class="col-md-2">
+  </div>
+</div>

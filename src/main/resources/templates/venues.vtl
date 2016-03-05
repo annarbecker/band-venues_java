@@ -1,4 +1,15 @@
-<h2>All Venues</h2>
-#foreach ($venue in $venues)
-<h3><a href="/venues/$venue.getId()">$venue.getLocation()</a></h3>
-#end
+<div class="row">
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-8">
+    <h2 id="headerText">All Venues</h2>
+    <hr>
+    #foreach ($venue in $venues)
+    <div class="list">
+      <p><a href="/venues/$venue.getId()">$venue.getLocation()</a></p>
+    </div>
+    #end
+  </div>
+  <div class="col-md-2">
+  </div>
+</div>

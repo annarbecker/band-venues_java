@@ -1,6 +1,15 @@
-<h2>All Bands</h2>
-#foreach ($band in $bands)
-<h3><a href="/bands/$band.getId()">$band.getName()</a></h3>
-<a href="/bands/$band.getId()/edit">Edit Band</a>
-
-#end
+<div class="row">
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-8">
+    <h2 id="headerText">All Bands</h2>
+    <hr>
+    #foreach ($band in $bands)
+    <div class="list">
+      <p><a href="/bands/$band.getId()">$band.getName()</a></p>
+    </div>
+    #end
+  </div>
+  <div class="col-md-2">
+  </div>
+</div>

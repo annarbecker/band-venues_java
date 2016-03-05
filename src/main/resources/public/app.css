@@ -1,0 +1,32 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.list {
+  text-align: center;
+  background-color: #00CCA0;
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 2px;
+  margin: 20px;
+  font-size: 18px;
+}
+
+.list:hover {
+  color: white;
+  background-color: #0B7F67;
+}
+
+.list a {
+  display: block;
+  color: white;
+}
+
+.list a:hover {
+  text-decoration: underline;
+  color: white;
+}
+
+p {
+  font-size: 16px;
+}
